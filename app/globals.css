@@ -1,97 +1,215 @@
 @import "tailwindcss";
 
-:root {
-  --background: #eef1ff;
-  --foreground: #17184f;
+/*
+ * EducationBd design system
+ * -------------------------
+ * Every color below comes from the logo (public/brand-logo.png):
+ *   periwinkle background  #9FA5D5
+ *   deep navy panel        #27254C
+ *   rocket / flame orange  #E76146
+ *   white lettering        #FFFFFF
+ * The lighter and darker steps are tints and shades of those same colors.
+ *
+ * Breakpoints (Tailwind defaults, used as: mobile first, then sm / md / lg / xl):
+ *   base  = phones             (under 640px)
+ *   sm    = large phones       (640px and up)
+ *   md    = tablets            (768px and up)
+ *   lg    = laptops / desktops (1024px and up)
+ *   xl    = wide screens       (1280px and up)
+ *
+ * Spacing: Tailwind's 4px step (p-1 = 4px, p-2 = 8px, p-4 = 16px, p-6 = 24px,
+ * p-8 = 32px). Use 16px (4) inside small things, 24px (6) inside cards, and
+ * 64px to 96px (16 to 24) between big page sections.
+ */
+
+@theme {
+  /* Remove Tailwind's default colors so only brand colors can be used. */
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Navy: main brand color. Text, primary buttons, dark areas. */
+  --color-navy-950: #1b1a38;
+  --color-navy-900: #27254c;
+  --color-navy-800: #34325f;
+  --color-navy-700: #4d486e;
+
+  /* Periwinkle: backgrounds, borders, soft panels. */
+  --color-periwinkle-50: #f6f7fc;
+  --color-periwinkle-100: #eceef8;
+  --color-periwinkle-200: #dde0f2;
+  --color-periwinkle-300: #c9cde9;
+  --color-periwinkle-400: #b4b9e0;
+  --color-periwinkle-500: #9fa5d5;
+
+  /* Orange: accent. 500 is for decoration only (too light for white text).
+     600 and 700 are safe for buttons with white text. */
+  --color-orange-100: #fce9e3;
+  --color-orange-500: #e76146;
+  --color-orange-600: #c4452a;
+  --color-orange-700: #a93a22;
+
+  /* Status colors, used only for form and system messages. */
+  --color-danger-600: #b42318;
+  --color-danger-100: #fdecea;
+  --color-success-700: #1e6b3a;
+  --color-success-100: #e6f4ea;
+
+  /* Meaning-based names. Use these in components. */
+  --color-page: var(--color-periwinkle-50);
+  --color-surface: var(--color-white);
+  --color-line: var(--color-periwinkle-200);
+  /* Darker border for form fields so they are easy to see (3.5 to 1 contrast). */
+  --color-field: #7f85b8;
+  --color-ink: var(--color-navy-900);
+  --color-muted: #5c5a82;
+  --color-brand: var(--color-navy-900);
+  --color-brand-hover: var(--color-navy-800);
+  --color-accent: var(--color-orange-600);
+  --color-accent-hover: var(--color-orange-700);
+
+  /*
+   * Fonts. English text uses Geist, Bangla text uses Noto Sans Bengali.
+   * Listing both lets one sentence contain both languages.
+   */
+  --font-sans:
+    var(--font-english), var(--font-bangla), ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Noto Sans Bengali", "Kalpurush", sans-serif;
+
+  /*
+   * Text sizes. Line heights are taller than usual because Bangla letters
+   * have marks above and below the line that get cut off when lines are tight.
+   */
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.6;
+  --text-base: 1rem;
+  --text-base--line-height: 1.7;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.65;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.5;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.4;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 1.35;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 1.3;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1.2;
+
+  /* Corners: small and consistent. Not too round. */
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+
+  /* Shadows: soft and subtle, tinted with navy. */
+  --shadow-card:
+    0 1px 2px rgb(39 37 76 / 0.06), 0 4px 16px -4px rgb(39 37 76 / 0.1);
+  --shadow-raised:
+    0 2px 4px rgb(39 37 76 / 0.08), 0 12px 32px -8px rgb(39 37 76 / 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0.35) 27%, transparent 52%),
-    var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.coming-soon {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 32px 20px;
-}
-
-.coming-soon__content {
-  display: flex;
-  width: 100%;
-  max-width: 720px;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.brand-mark {
-  position: relative;
-  width: clamp(220px, 30vw, 280px);
-  aspect-ratio: 1;
-  overflow: hidden;
-  border: 8px solid rgba(255, 255, 255, 0.92);
-  border-radius: 50%;
-  background: #9ca8e8;
-  box-shadow:
-    0 18px 45px rgba(41, 48, 116, 0.18),
-    0 0 0 1px rgba(23, 24, 79, 0.08);
-}
-
-.brand-mark img {
-  object-fit: cover;
-}
-
-.coming-soon h1 {
-  margin: 30px 0 0;
-  color: #17184f;
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  font-size: clamp(2rem, 6vw, 4.25rem);
-  font-weight: 750;
-  line-height: 1.08;
-  letter-spacing: -0.045em;
-}
-
-.coming-soon h1 span {
-  display: block;
-  margin-top: 8px;
-  color: #4652a3;
-  font-size: 0.66em;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-@media (max-width: 640px) {
-  .coming-soon {
-    padding-block: 24px;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
-  .brand-mark {
-    border-width: 6px;
+  body {
+    min-height: 100vh;
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    /* Long titles or links wrap instead of pushing the page wider. */
+    overflow-wrap: break-word;
   }
 
-  .coming-soon h1 {
-    margin-top: 24px;
+  /*
+   * Heading hierarchy. Mobile sizes first, larger on bigger screens.
+   * No negative letter spacing: it damages Bangla joined letters.
+   */
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
+  }
+  h2 {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+  }
+  h3 {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+    font-weight: 600;
+  }
+  h4 {
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+    font-weight: 600;
+  }
+
+  @media (min-width: 48rem) {
+    h1 {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+    h2 {
+      font-size: var(--text-3xl);
+      line-height: var(--text-3xl--line-height);
+    }
+    h3 {
+      font-size: var(--text-2xl);
+      line-height: var(--text-2xl--line-height);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    h1 {
+      font-size: var(--text-5xl);
+      line-height: var(--text-5xl--line-height);
+    }
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* One clear focus ring everywhere, so keyboard users never get lost. */
+  :focus-visible {
+    outline: 3px solid var(--color-orange-500);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-periwinkle-300);
+    color: var(--color-navy-950);
+  }
+
+  /* Respect people who turn off animations in their device settings. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EducationBd
 
-## Getting Started
+University admission preparation platform for students in Bangladesh.
 
-First, run the development server:
+Built with Next.js (App Router), React, TypeScript and Tailwind CSS. Deployed on Vercel.
+
+## Run the project
+
+You need Node.js 20.9 or newer.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install      # install packages (first time only)
+npm run dev      # start the development site at http://localhost:3000
+npm run build    # make a production build (run this before you push)
+npm run lint     # check the code for mistakes
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Environment variables: copy `.env.example` to `.env.local` and fill in the values. Never commit `.env.local`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Folder guide
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/               Pages and layouts. Each folder is one web address.
+  design-system/   Preview of colors, text, buttons and forms (hidden in production)
+components/
+  ui/              Small reusable parts: Button, Input, Field, Card, Container, Logo
+  layout/          Larger parts of the page frame: SiteHeader
+lib/               Shared helpers: fonts, utilities, site facts
+assets/fonts/      Font files stored in the project (no Google download needed)
+public/            Files served as they are: logo, favicon
+```
 
-## Learn More
+## Design system
 
-To learn more about Next.js, take a look at the following resources:
+See `app/globals.css` for all colors, text sizes, corners and shadows.
+To see them on screen, run `npm run dev` and open `/design-system`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Colors come from the logo: navy `#27254C`, periwinkle `#9FA5D5`, orange `#E76146`, white.
+- English font: Geist. Bangla font: Noto Sans Bengali. Both work in one sentence.
+- Breakpoints: phones (under 640px), `sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px.
+- Use the meaning-based color names in components: `text-ink`, `text-muted`, `bg-page`, `bg-surface`, `border-line`, `bg-brand`, `bg-accent`.
